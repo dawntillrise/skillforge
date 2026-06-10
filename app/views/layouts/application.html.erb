@@ -36,7 +36,9 @@
 
         <div class="sf-nav-actions">
           <% if logged_in? %>
-            <span class="sf-nav-user">Signed in as <strong><%= current_user.email %></strong></span>
+            <%= link_to "My Network", connections_path, class: "sf-btn sf-btn-link" %>
+            <%= link_to "Messages", messages_path, class: "sf-btn sf-btn-link" %>
+            <span class="sf-nav-user" style="margin-left: 1rem;">Signed in as <strong><%= current_user.email %></strong></span>
             <%= button_to "Logout", logout_path, method: :delete, class: "sf-btn sf-btn-link", form: { class: "inline-form" } %>
           <% else %>
             <%= link_to "Sign In", login_path, class: "sf-btn sf-btn-link" %>

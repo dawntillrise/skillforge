@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get "/register", to: "users#new", as: :register
   post "/register", to: "users#create"
 
+  resources :connections, only: [:index, :create, :update, :destroy]
+  resources :messages, only: [:index, :show, :create]
+
   # Defines the root path route ("/")
   root "home#index"
 end

@@ -79,6 +79,7 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.22)
     bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
     bigdecimal (4.1.2)
     bindex (0.8.1)
     bootsnap (1.24.6)
@@ -181,7 +182,7 @@ GEM
     nokogiri (1.19.3-x86_64-linux-musl)
       racc (~> 1.4)
     ostruct (0.6.3)
-    parallel (2.1.0)
+    parallel (1.28.0)
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
@@ -300,7 +301,7 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    solid_cable (4.0.0)
+    solid_cable (3.0.12)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -359,6 +360,7 @@ PLATFORMS
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
+  arm64-darwin-21
   arm64-darwin-24
   x86_64-linux
   x86_64-linux-gnu

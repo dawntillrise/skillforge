@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "message-form" do %>
+  <%= form_with model: Message.new, url: messages_path, id: "message-form" do |form| %>
+    <%= form.hidden_field :receiver_id, value: @receiver.id %>
+    <%= form.text_field :content, placeholder: "Type your message...", required: true, autocomplete: "off", autofocus: true %>
+    <%= form.submit "Send", class: "sf-btn sf-btn-primary" %>
+  <% end %>
+<% end %>

@@ -1,0 +1,65 @@
+<div class="sf-container network-container">
+  <% if @pending_requests.any? %>
+    <div class="network-section">
+      <h2>Pending Invitations</h2>
+      <div class="user-grid">
+        <% @pending_requests.each do |request| %>
+          <div class="user-card">
+            <div class="user-avatar">
+              <%= request.sender.email[0].upcase %>
+            </div>
+            <div class="user-name"><%= request.sender.email %></div>
+            <div class="user-card-actions">
+              <%= button_to "Accept", connection_path(request, status: 'accepted'), method: :patch, class: "sf-btn sf-btn-primary" %>
+              <%= button_to "Ignore", connection_path(request), method: :delete, class: "sf-btn sf-btn-link" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @connected_users.any? %>
+    <div class="network-section">
+      <h2>Your Network</h2>
+      <div class="user-grid">
+        <% @connected_users.each do |user| %>
+          <div class="user-card">
+            <div class="user-avatar">
+              <%= user.email[0].upcase %>
+            </div>
+            <div class="user-name"><%= user.email %></div>
+            <div class="user-card-actions">
+              <%= link_to "Message", messages_path(user_id: user.id), class: "sf-btn sf-btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="network-section">
+    <h2>People You May Know</h2>
+    <% if @people_you_may_know.any? %>
+      <div class="user-grid">
+        <% @people_you_may_know.each do |user| %>
+          <div class="user-card">
+            <div class="user-avatar">
+              <%= user.email[0].upcase %>
+            </div>
+            <div class="user-name"><%= user.email %></div>
+            <div class="user-card-actions">
+              <% if current_user.sent_connection_requests.exists?(receiver: user, status: 'pending') %>
+                <button class="sf-btn sf-btn-link" disabled>Request Sent</button>
+              <% else %>
+                <%= button_to "Connect", connections_path(receiver_id: user.id), method: :post, class: "sf-btn sf-btn-primary" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">No suggestions right now. Explore and invite people to Skillforge!</p>
+    <% end %>
+  </div>
+</div>
