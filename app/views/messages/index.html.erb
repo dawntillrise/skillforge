@@ -1,0 +1,80 @@
+<div class="sf-container">
+  <div class="chat-layout">
+    <!-- Sidebar with Connections -->
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-header">
+        <h2>Messages</h2>
+      </div>
+      <div class="chat-contact-list">
+        <% if @connected_users.any? %>
+          <% @connected_users.each do |user| %>
+            <%= link_to messages_path(user_id: user.id), class: "chat-contact #{'active' if @active_user&.id == user.id}", data: { turbo: false } do %>
+              <div class="user-avatar">
+                <%= user.email[0].upcase %>
+              </div>
+              <div class="user-info">
+                <div class="user-name"><%= user.email %></div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div style="padding: 2rem 1.5rem; color: var(--text-muted); text-align: center;">
+            <p>You have no connections yet.</p>
+            <%= link_to "Build your network", connections_path, class: "sf-btn sf-btn-primary", style: "margin-top: 1rem;" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-main">
+      <% if @active_user %>
+        <div class="chat-header">
+          <div class="user-avatar" style="width: 40px; height: 40px; font-size: 1rem; border-width: 1px; margin: 0;">
+            <%= @active_user.email[0].upcase %>
+          </div>
+          <div class="user-name"><%= @active_user.email %></div>
+        </div>
+
+        <div class="chat-messages" id="messages">
+          <%= turbo_stream_from "conversation_#{current_user.id}_with_#{@active_user.id}" %>
+          
+          <% @messages.each do |message| %>
+            <%= render message %>
+          <% end %>
+        </div>
+
+        <div class="chat-input-area">
+          <%= form_with model: @new_message, url: messages_path, id: "message-form" do |form| %>
+            <%= form.hidden_field :receiver_id, value: @active_user.id %>
+            <%= form.text_field :content, placeholder: "Type your message...", required: true, autocomplete: "off" %>
+            <%= form.submit "Send", class: "sf-btn sf-btn-primary" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="empty-chat-state">
+          <div class="icon">💬</div>
+          <h3>Select a conversation</h3>
+          <p>Choose a contact from the sidebar to start messaging.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-scroll to bottom of messages
+  function scrollToBottom() {
+    const messages = document.getElementById('messages');
+    if (messages) {
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+
+  document.addEventListener('turbo:load', scrollToBottom);
+  
+  // Also scroll when new message is added via Turbo Streams
+  document.addEventListener('turbo:before-stream-render', function() {
+    setTimeout(scrollToBottom, 10);
+  });
+</script>

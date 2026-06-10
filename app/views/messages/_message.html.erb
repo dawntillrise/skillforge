@@ -1,0 +1,4 @@
+<% viewer_id = local_assigns[:perspective_user_id] || current_user.id %>
+<div class="message-bubble <%= message.sender_id == viewer_id ? 'message-sent' : 'message-received' %>" id="<%= dom_id(message) %>">
+  <%= message.content %>
+</div>
