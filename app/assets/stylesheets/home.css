@@ -112,6 +112,87 @@ body {
   align-items: center;
 }
 
+/* Auth forms */
+.sf-auth {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.sf-auth .sf-container {
+  max-width: 480px;
+  background: rgba(15, 20, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  padding: 2.5rem;
+}
+
+.sf-auth h1 {
+  margin: 0 0 1.5rem;
+  color: white;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+}
+
+.sf-field {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1.25rem;
+}
+
+.sf-field label {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.sf-field input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  font-size: 1rem;
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.sf-field input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sf-field input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.75);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+.sf-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flash {
+  max-width: 480px;
+  margin: 0 auto 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  font-size: 0.95rem;
+}
+
+.flash.notice {
+  background: rgba(67, 183, 162, 0.12);
+  border: 1px solid rgba(67, 183, 162, 0.25);
+  color: #d2f9ec;
+}
+
+.flash.alert {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #ffd7d9;
+}
+
 @media (max-width: 768px) {
   .sf-navbar {
     padding: 0.75rem 0;

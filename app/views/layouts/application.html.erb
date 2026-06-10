@@ -27,6 +27,29 @@
   </head>
 
   <body>
+    <header class="sf-navbar">
+      <div class="sf-container navbar-container">
+        <a href="/" class="sf-logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">SKILLFORGE</span>
+        </a>
+
+        <div class="sf-nav-actions">
+          <% if logged_in? %>
+            <span class="sf-nav-user">Signed in as <strong><%= current_user.email %></strong></span>
+            <%= button_to "Logout", logout_path, method: :delete, class: "sf-btn sf-btn-link", form: { class: "inline-form" } %>
+          <% else %>
+            <%= link_to "Sign In", login_path, class: "sf-btn sf-btn-link" %>
+            <%= link_to "Get Started", register_path, class: "sf-btn sf-btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    <% flash.each do |key, message| %>
+      <div class="flash <%= key %>"><%= message %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

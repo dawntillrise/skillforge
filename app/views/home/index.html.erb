@@ -1,12 +1,11 @@
-<header class="sf-navbar">
-  <div class="sf-container navbar-container">
-    <a href="/" class="sf-logo">
-      <span class="logo-icon">✦</span>
-      <span class="logo-text">SKILLFORGE</span>
-    </a>
-    <div class="sf-nav-actions">
-      <a href="/login" class="sf-btn sf-btn-link">Sign In</a>
-      <a href="/register" class="sf-btn sf-btn-primary">Get Started</a>
-    </div>
+<section class="sf-hero">
+  <div class="sf-container">
+    <% if logged_in? %>
+      <h1>Welcome back, <%= current_user.email %>!</h1>
+      <p>You're signed in to Skillforge. Explore your dashboard or start building something amazing.</p>
+    <% else %>
+      <h1>Welcome to Skillforge</h1>
+      <p>Sign in or create an account to get started with your learning journey.</p>
+    <% end %>
   </div>
-</header>
+</section>
