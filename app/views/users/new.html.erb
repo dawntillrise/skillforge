@@ -1,0 +1,26 @@
+<section class="sf-auth">
+  <div class="sf-container">
+    <h1>Create Account</h1>
+
+    <%= form_with model: @user, url: register_path, local: true do |form| %>
+      <div class="sf-field">
+        <%= form.label :email %>
+        <%= form.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+      </div>
+
+      <div class="sf-field">
+        <%= form.label :password %>
+        <%= form.password_field :password, autocomplete: "new-password", required: true %>
+      </div>
+
+      <div class="sf-field">
+        <%= form.label :password_confirmation, "Confirm Password" %>
+        <%= form.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+      </div>
+
+      <div class="sf-actions">
+        <%= form.submit "Register", class: "sf-btn sf-btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
